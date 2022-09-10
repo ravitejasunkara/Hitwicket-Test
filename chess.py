@@ -1,8 +1,11 @@
 import pygame
+
 import time
+
 import sys
 
 chess_board = [['  ' for i in range(8)] for i in range(8)]
+
 
 class chess_peice:
     def __init__(self, team, type, image, dead=False):
@@ -15,36 +18,18 @@ class chess_peice:
 
 bp = chess_peice('b', 'p', '1.png')
 wp = chess_peice('w', 'p', '2.png')
-bk = chess_peice('b', 'k', '3.png')
-wk = chess_peice('w', 'k', '4.png')
-br = chess_peice('b', 'r', '5.png')
-wr = chess_peice('w', 'r', '6.png')
-b = chess_peice('b', 'b', '7.png')
-wb = chess_peice('w', 'b', '8.png')
-bq = chess_peice('b', 'q', '9.png')
-wq = chess_peice('w', 'q', '10.png')
-bkn = chess_peice('b', 'kn', '11.png')
-wkn = chess_peice('w', 'kn', '12.png')
 
 
-starting_order = {(0, 6): pygame.image.load(wp.image), (1, 6): pygame.image.load(wp.image),
-                  (2, 6): pygame.image.load(wp.image), (3, 6): pygame.image.load(wp.image),
+starting_order = {(2, 6): pygame.image.load(wp.image), (3, 6): pygame.image.load(wp.image),
                   (4, 6): pygame.image.load(wp.image), (5, 6): pygame.image.load(wp.image),
-                  (6, 6): pygame.image.load(wp.image), (7, 6): pygame.image.load(wp.image),
-                  (0, 7): pygame.image.load(wr.image), (1, 7): pygame.image.load(wkn.image),
-                  (2, 7): pygame.image.load(wb.image), (3, 7): pygame.image.load(wk.image),
-                  (4, 7): pygame.image.load(wq.image), (5, 7): pygame.image.load(wb.image),
-                  (6, 7): pygame.image.load(wkn.image), (7, 7): pygame.image.load(wr.image),
+                  (6, 6): pygame.image.load(wp.image), 
+                  
 
-
-                  (0, 0): pygame.image.load(br.image), (1, 0): pygame.image.load(bkn.image),
-                  (2, 0): pygame.image.load(b.image), (3, 0): pygame.image.load(bk.image),
-                  (4, 0): pygame.image.load(bq.image), (5, 0): pygame.image.load(b.image),
-                  (6, 0): pygame.image.load(bkn.image), (7, 0): pygame.image.load(br.image),
-                  (0, 1): pygame.image.load(bp.image), (1, 1): pygame.image.load(bp.image),
+                  
+                  
                   (2, 1): pygame.image.load(bp.image), (3, 1): pygame.image.load(bp.image),
                   (4, 1): pygame.image.load(bp.image), (5, 1): pygame.image.load(bp.image),
-                  (6, 1): pygame.image.load(bp.image), (7, 1): pygame.image.load(bp.image),
+                  (6, 1): pygame.image.load(bp.image), 
 
                   (0, 2): None, (1, 2): None, (2, 2): None, (3, 2): None,
                   (4, 2): None, (5, 2): None, (6, 2): None, (7, 2): None,
@@ -59,14 +44,10 @@ starting_order = {(0, 6): pygame.image.load(wp.image), (1, 6): pygame.image.load
 
 
 def create_board(chess_board):
-    chess_board[7] = [chess_peice('w', 'r', '6.png'), chess_peice('w', 'kn', '12.png'), chess_peice('w', 'b', '8.png'), \
-               chess_peice('w', 'q', '10.png'), chess_peice('w', 'k', '4.png'), chess_peice('w', 'b', '8.png'), \
-               chess_peice('w', 'kn', '12.png'), chess_peice('w', 'r', '6.png')]
+    chess_board[7] = [chess_peice('w', 'p', '1.png'), ]
 
 
-    chess_board[0] = [chess_peice('b', 'r', '5.png'), chess_peice('b', 'kn', '11.png'), chess_peice('b', 'b', '7.png'), \
-               chess_peice('b', 'q', '9.png'), chess_peice('b', 'k', '3.png'), chess_peice('b', 'b', '7.png'), \
-               chess_peice('b', 'kn', '11.png'), chess_peice('b', 'r', '5.png')]
+    chess_board[0] = [chess_peice('b', 'p', '2.png'), ]
 
     
 
@@ -144,20 +125,7 @@ def select_moves(chess_peice, inx, mvs):
             else:
                 return highlight(pawn_w_moves(inx))
 
-        if chess_peice.type == 'k':
-            return highlight(king_moves_in_board(inx))
-
-        if chess_peice.type == 'r':
-            return highlight(rook_moves_in_board(inx))
-
-        if chess_peice.type == 'b':
-            return highlight(bishop_moves_in_board(inx))
-
-        if chess_peice.type == 'q':
-            return highlight(queen_moves_in_board(inx))
-
-        if chess_peice.type == 'kn':
-            return highlight(knight_moves(inx))
+        
 
 
 
@@ -201,75 +169,35 @@ def pawn_w_moves(inx):
 
 
 
-def king_moves_in_board(inx):
-    for y in range(3):
-        for x in range(3):
-            if on_board((inx[0] - 1 + y, inx[1] - 1 + x)):
-                if chess_board[inx[0] - 1 + y][inx[1] - 1 + x] == '  ':
-                    chess_board[inx[0] - 1 + y][inx[1] - 1 + x] = 'x '
+def Hero1_moves(inx):
+    for y in range(4):
+        for x in range(4):
+            if on_board((inx[0] - 2 + y, inx[1] - 2 + x)):
+                if chess_board[inx[0] - 2 + y][inx[1] - 2 + x] == '  ':
+                    chess_board[inx[0] - 2 + y][inx[1] - 2 + x] = 'x '
                 else:
-                    if chess_board[inx[0] - 1 + y][inx[1] - 1 + x].team != chess_board[inx[0]][inx[1]].team:
-                        chess_board[inx[0] - 1 + y][inx[1] - 1 + x].dead = True
+                    if chess_board[inx[0] - 2 + y][inx[1] - 2 + x].team != chess_board[inx[0]][inx[1]].team:
+                        chess_board[inx[0] - 2 + y][inx[1] - 2 + x].dead = True
     return chess_board
 
-
-
-def rook_moves_in_board(inx):
-    cross = [[[inx[0] + i, inx[1]] for i in range(1, 8 - inx[0])],
-             [[inx[0] - i, inx[1]] for i in range(1, inx[0] + 1)],
-             [[inx[0], inx[1] + i] for i in range(1, 8 - inx[1])],
-             [[inx[0], inx[1] - i] for i in range(1, inx[1] + 1)]]
-
-    for direction in cross:
-        for place_positions_in_board in direction:
-            if on_board(place_positions_in_board):
-                if chess_board[place_positions_in_board[0]][place_positions_in_board[1]] == '  ':
-                    chess_board[place_positions_in_board[0]][place_positions_in_board[1]] = 'x '
+def Hero2_moves(inx):
+    for y in range(4):
+        for x in range(4):
+            if on_board((inx[0] - 2 + y, inx[1] - 2 + x)):
+                if chess_board[inx[0] - 2 + y][inx[1] - 2 + x] == '  ':
+                    chess_board[inx[0] - 2 + y][inx[1] - 2 + x] = 'x '
                 else:
-                    if chess_board[place_positions_in_board[0]][place_positions_in_board[1]].team != chess_board[inx[0]][inx[1]].team:
-                        chess_board[place_positions_in_board[0]][place_positions_in_board[1]].dead = True
-                    break
+                    if chess_board[inx[0] - 2 + y][inx[1] - 2 + x].team != chess_board[inx[0]][inx[1]].team:
+                        chess_board[inx[0] - 2 + y][inx[1] - 2 + x].dead = True
     return chess_board
 
 
 
-def bishop_moves_in_board(inx):
-    diagonals = [[[inx[0] + i, inx[1] + i] for i in range(1, 8)],
-                 [[inx[0] + i, inx[1] - i] for i in range(1, 8)],
-                 [[inx[0] - i, inx[1] + i] for i in range(1, 8)],
-                 [[inx[0] - i, inx[1] - i] for i in range(1, 8)]]
-
-    for direction in diagonals:
-        for place_positions_in_board in direction:
-            if on_board(place_positions_in_board):
-                if chess_board[place_positions_in_board[0]][place_positions_in_board[1]] == '  ':
-                    chess_board[place_positions_in_board[0]][place_positions_in_board[1]] = 'x '
-                else:
-                    if chess_board[place_positions_in_board[0]][place_positions_in_board[1]].team != chess_board[inx[0]][inx[1]].team:
-                        chess_board[place_positions_in_board[0]][place_positions_in_board[1]].dead = True
-                    break
-    return chess_board
 
 
 
-def queen_moves_in_board(inx):
-    chess_board = rook_moves_in_board(inx)
-    chess_board = bishop_moves_in_board(inx)
-    return chess_board
 
 
-
-def knight_moves(inx):
-    for i in range(-2, 3):
-        for j in range(-2, 3):
-            if i ** 2 + j ** 2 == 5:
-                if on_board((inx[0] + i, inx[1] + j)):
-                    if chess_board[inx[0] + i][inx[1] + j] == '  ':
-                        chess_board[inx[0] + i][inx[1] + j] = 'x '
-                    else:
-                        if chess_board[inx[0] + i][inx[1] + j].team != chess_board[inx[0]][inx[1]].team:
-                            chess_board[inx[0] + i][inx[1] + j].dead = True
-    return chess_board
 
 
 WIDTH = 800
